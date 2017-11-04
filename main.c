@@ -354,11 +354,13 @@ void dump_hash_table(void) {
 
 printf("}; \n\r");
 
+int offset = 0;
 
 for (int i = 0; i < ARRAY_LENGTH(word_lookup_table); i++) {
 
 
-    printf(" %5d , // (%5d) %5.5d = %s \n\r", word_lookup_table[i].meaning, i, word_lookup_table[i].meaning, word_lookup_table[i].text);
+    printf(" %5d , // (%5d) %5.5d = %s \n\r", word_lookup_table[i].meaning - offset , i, word_lookup_table[i].meaning, word_lookup_table[i].text);
+    offset = word_lookup_table[i].meaning;
 
 }
 
@@ -366,6 +368,7 @@ for (int i = 0; i < ARRAY_LENGTH(word_lookup_table); i++) {
 
 
 }
+
 int lookup(const char *w)
 {
     
