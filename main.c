@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <avr/pgmspace.h>
 
 int ran(int range) { return rand() % range; }
 
@@ -33,7 +34,7 @@ typedef enum {
 
 // Stores the test for each word. The corresponding meaning is in the next table
 
-char word_text_table[][WORD_TEXT_LEN]={
+const char word_text_table[][WORD_TEXT_LEN] ={
     {'\x72', '\x6f', '\x61', '\x64', '\x00', }, // (  100) 00000 = road
     { '\x68','\x69','\x6c','\x6c','\x00', }, // (  100) 00001 = hill
     { '\x65','\x6e','\x74','\x65','\x72', }, // (  101) 00002 = enter
@@ -319,7 +320,7 @@ char word_text_table[][WORD_TEXT_LEN]={
 
 // Stores the offset from the meaning of the previous record.
 
-unsigned char word_meaning_offset_table[]= {
+const unsigned char word_meaning_offset_table[] = {
 
     100, // (    0) 00100 = road
     0, // (    1) 00100 = hill
@@ -628,6 +629,10 @@ int lookup(const char *w)
 }
 
 #define NOTHING 0
+
+// This gets defined in PRGMEM and messes up our SE
+
+#undef SE
 
 typedef enum {
     MIN_MOTION=100,
@@ -2786,9 +2791,6 @@ void quit(void)
     } else {
         puts(" would be a neat trick!\nCongratulations!!");
     }
-#ifdef Z_MACHINE
-    puts("\n");
-#endif /* Z_MACHINE */
     exit(0);
 }
 
@@ -4470,10 +4472,6 @@ void dwarves_upset(void)
 
 int main()
 {
-#ifdef Z_MACHINE
-    puts("\n\n\n\n\n\n\n\n");
-#endif /* Z_MACHINE */
-
     offer(0);
     /* Reading the instructions marks you as a newbie who will need the
      * extra lamp power. However, it will also cost you 5 points. */

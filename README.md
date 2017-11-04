@@ -31,4 +31,11 @@ Program Memory Usage 	:	87306 bytes   266.4 % Full	(Memory Overflow)
 Data Memory Usage 		:	49110 bytes   2397.9 % Full	(Memory Overflow)
 ```
 
+4. Bifurcate the word database into two tables, one for `text` and one for `meaning`. Now the text can just be an array of char[5], saving the trailing `\x00` at the end of each string.
+ 
+5. Sort the word tables by the value of meaning, and then only store the difference between sequential meaning values, which is never more than 100. The diff can now be stored as only an `unsigned char` rather than an `int` and we computer the full `int` as we scan the table. Having these simple arrays will also make it easier to switch to `PROGMEM` when the time comes (PROGMEM can't do arrays of structs). 
 
+```
+Program Memory Usage 	:	86770 bytes   264.8 % Full	(Memory Overflow)
+Data Memory Usage 		:	48548 bytes   2370.5 % Full	(Memory Overflow)
+```
