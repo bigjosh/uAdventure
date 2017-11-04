@@ -35,7 +35,7 @@ struct WordEntry {
     int meaning;
 };
 
-struct WordEntry word_lookup_table[]= {
+const struct WordEntry word_lookup_table[] = {
     {"abrac"    ,   400 }, // 00058
     {"?"        ,   401 }, // 00063
     {"beans"    ,   227 }, // 00072
@@ -321,6 +321,37 @@ struct WordEntry word_lookup_table[]= {
 
 
 #define ARRAY_LENGTH(array) (sizeof((array))/sizeof((array)[0]))
+
+// Dump out code to recreate the hashtable directly in memory
+
+void dump_hash_table(void) {
+
+    printf("struct HashEntry hash_table[HASH_PRIME]= { \r\n");
+
+        char *padding = "       ";
+
+        for (int i = 0; i < ARRAY_LENGTH( word_lookup_table) ; i++) {
+
+            printf(" { {");
+                
+                for (int s = 0; s < ARRAY_LENGTH(word_lookup_table[i].text); s++) {
+
+                    char c = word_lookup_table[i].text[s];
+
+                    if (c == '\"') printf("'\\\"',");
+                    else printf("'\\0x%2.2x'," , c );
+
+
+                }
+
+            printf("} , %5.05d }, // %5.5d = %s \n\r", word_lookup_table[i].meaning, i, word_lookup_table[i].text);
+
+        }
+
+    printf("}; \n\r");
+
+}
+
 
 int lookup(const char *w)
 {
