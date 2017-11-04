@@ -326,29 +326,26 @@ const struct WordEntry word_lookup_table[] = {
 
 void dump_hash_table(void) {
 
-    printf("struct HashEntry hash_table[HASH_PRIME]= { \r\n");
 
-        char *padding = "       ";
+    for (int i = 0; i < ARRAY_LENGTH( word_lookup_table) ; i++) {
 
-        for (int i = 0; i < ARRAY_LENGTH( word_lookup_table) ; i++) {
+        printf(" { {");
+            
+            for (int s = 0; s < ARRAY_LENGTH(word_lookup_table[i].text); s++) {
 
-            printf(" { {");
-                
-                for (int s = 0; s < ARRAY_LENGTH(word_lookup_table[i].text); s++) {
+                char c = word_lookup_table[i].text[s];
 
-                    char c = word_lookup_table[i].text[s];
-
-                    if (c == '\"') printf("'\\\"',");
-                    else printf("'\\0x%2.2x'," , c );
+                if (c == '\"') printf("'\\\"',");
+                else printf("'\\x%2.2x'," , c );
 
 
-                }
+            }
 
-            printf("} , %5.05d }, // %5.5d = %s \n\r", word_lookup_table[i].meaning, i, word_lookup_table[i].text);
+        printf("} , %5d }, // %5.5d = %s \n\r", word_lookup_table[i].meaning, i, word_lookup_table[i].text);
 
-        }
+    }
 
-    printf("}; \n\r");
+printf("}; \n\r");
 
 }
 
