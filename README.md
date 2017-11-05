@@ -40,4 +40,10 @@ Program Memory Usage 	:	86770 bytes   264.8 % Full	(Memory Overflow)
 Data Memory Usage 		:	48548 bytes   2370.5 % Full	(Memory Overflow)
 ```
 
-6. Extract all static strings and convert them onto refs to `GET_CSTR()` which will pull them form flash memory and decompress them one byte at a time as they are printed. 
+6. Extract all static strings and convert them onto refs to `GET_CSTR()` which will pull them form flash memory and decompress them one byte at a time as they are printed.
+
+```
+Program Memory Usage 	:	33758 bytes   103.0 % Full	(Memory Overflow)
+Data Memory Usage 		:	3576 bytes   174.6 % Full	(Memory Overflow)
+```
+  
