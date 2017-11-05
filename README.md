@@ -2,6 +2,11 @@
 
 An attempt to get Colossal Cave Adventure to fit into a tiny chip.  
 
+UPDATE: I am giving up. I was hoping to get there with some quick precompling and compressing of the data structures and static strings. 
+While initial work on this front was fruitful, the program code itself will not fit into 32K even getting rid of the strings entirely. I'm sure with enough effort this program could be rewritten to be space efficient, definetly not worth the effort (at least for me!).
+
+
+
 ## Starting point
 
 This nice clean C version...
@@ -40,7 +45,7 @@ Program Memory Usage 	:	86770 bytes   264.8 % Full	(Memory Overflow)
 Data Memory Usage 		:	48548 bytes   2370.5 % Full	(Memory Overflow)
 ```
 
-6. Extract all static strings and convert them onto refs to `GET_CSTR()` which will pull them form flash memory and decompress them one byte at a time as they are printed.
+6. Extract all static strings and convert them onto refs to `GET_CSTR()` which will pull them from flash memory and decompress them one byte at a time as they are printed.
 
 ```
 Program Memory Usage 	:	33758 bytes   103.0 % Full	(Memory Overflow)
